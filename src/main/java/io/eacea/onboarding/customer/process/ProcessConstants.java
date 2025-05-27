@@ -1,4 +1,4 @@
-package io.berndruecker.onboarding.customer.process;
+package io.eacea.onboarding.customer.process;
 
 public class ProcessConstants {
 

@@ -1,4 +1,4 @@
-package io.berndruecker.onboarding.customer.process;
+package io.eacea.onboarding.customer.process;
 
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import org.slf4j.Logger;

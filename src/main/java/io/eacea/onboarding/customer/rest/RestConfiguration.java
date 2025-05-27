@@ -1,4 +1,4 @@
-package io.berndruecker.onboarding.customer.rest;
+package io.eacea.onboarding.customer.rest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

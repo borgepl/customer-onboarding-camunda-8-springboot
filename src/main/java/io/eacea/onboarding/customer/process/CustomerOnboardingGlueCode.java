@@ -1,4 +1,4 @@
-package io.berndruecker.onboarding.customer.process;
+package io.eacea.onboarding.customer.process;
 
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.Variable;
@@ -23,6 +23,8 @@ public class CustomerOnboardingGlueCode {
     public void addCustomerToCrm(@Variable String customerName) {
         System.out.println("Adding customer to CRM via REST: " + customerName);
 
+        logger.info(customerName);
+        
         String request = "someData";
         restTemplate.put(ENDPOINT_CRM, request);
     }
