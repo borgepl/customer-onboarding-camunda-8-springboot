@@ -1,4 +1,4 @@
-package io.berndruecker.onboarding.customer.rest;
+package io.eacea.onboarding.customer.rest;
 
 import java.util.HashMap;
 
@@ -24,14 +24,15 @@ public class CustomerOnboardingRestController {
   @PutMapping("/customer")
   public ResponseEntity<CustomerOnboardingResponse> onboardCustomer(ServerWebExchange exchange) {
     onboardCustomer();
+
     return ResponseEntity.status(HttpStatus.ACCEPTED).build();
   }
 
   public void onboardCustomer() {
     HashMap<String, Object> variables = new HashMap<String, Object>();
     variables.put("automaticProcessing", true);
-    variables.put("someInput", "yeah");
-    variables.put("customerName", "Bernd Ruecker");
+    variables.put("someInput", "yeah - camunda is FUN");
+    variables.put("customerName", "Pascal De Borger");
     variables.put("customerEmail", recipientDemoEmail);
 
     client.newCreateInstanceCommand() //

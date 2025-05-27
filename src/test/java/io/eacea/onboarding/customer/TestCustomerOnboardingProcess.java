@@ -1,12 +1,13 @@
-package io.berndruecker.onboarding.customer;
+package io.eacea.onboarding.customer;
 
-import io.berndruecker.onboarding.customer.rest.CustomerOnboardingRestController;
+import io.eacea.onboarding.customer.rest.CustomerOnboardingRestController;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.process.test.api.ZeebeTestEngine;
 import io.camunda.zeebe.process.test.inspections.InspectionUtility;
 import io.camunda.zeebe.process.test.inspections.model.InspectedProcessInstance;
 import io.camunda.zeebe.spring.test.ZeebeSpringTest;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ZeebeSpringTest
+//@AutoConfigureMockRestServiceServer
+//@ComponentScan(basePackageClasses={CustomerOnboardingSpringbootApplication.class})
+//@EnableAutoConfiguration
+
 public class TestCustomerOnboardingProcess {
 
     @Autowired
@@ -42,16 +47,23 @@ public class TestCustomerOnboardingProcess {
     @Autowired
     private RestTemplate restTemplate;
 
-    private MockRestServiceServer mockRestServer;
+    MockRestServiceServer mockRestServer;
 
     @BeforeEach
     public void init() {
         // Class level @AutoConfigureMockRestServiceServer does not work for me, so initializing it manually
-        mockRestServer = MockRestServiceServer.createServer(restTemplate);
+        // mockRestServer = MockRestServiceServer.createServer(restTemplate);
+        // mockRestServer = MockRestServiceServer.bindTo(restTemplate).build();
+        this.mockRestServer = MockRestServiceServer.createServer(restTemplate);
     }
 
     @Test
     public void testAutomaticOnboarding() throws Exception {
+
+        //CustomerOnboardingRestController customerOnboardingRestController = new CustomerOnboardingRestController(); 
+        //RestTemplate restTemplate = new RestTemplate();
+        //mockRestServer = MockRestServiceServer.bindTo(restTemplate).build();
+
         // Define expectations on the REST calls
         // 1. http://localhost:8080/crm/customer
         mockRestServer
@@ -72,6 +84,7 @@ public class TestCustomerOnboardingProcess {
         waitForProcessInstanceCompleted(processInstance, Duration.ofSeconds(10));
 
         // Let's assert that it passed certain BPMN elements (more to show off features here)
+        
         assertThat(processInstance)
                 .hasPassedElement("EndEventProcessed")
                 .isCompleted();

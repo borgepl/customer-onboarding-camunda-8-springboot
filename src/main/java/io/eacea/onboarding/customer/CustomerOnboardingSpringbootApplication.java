@@ -1,6 +1,5 @@
-package io.berndruecker.onboarding.customer;
+package io.eacea.onboarding.customer;
 
-import io.camunda.zeebe.spring.client.EnableZeebeClient;
 import io.camunda.zeebe.spring.client.annotation.Deployment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
